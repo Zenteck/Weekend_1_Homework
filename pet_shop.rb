@@ -33,7 +33,23 @@ return count_breed
 end
 
 def find_pet_by_name(shop_name, pet_name)
-for pet in shop_name[:pets]
-  
+  for pet in shop_name[:pets]
+    if pet[:name] == pet_name
+      return pet_name, pet
+    else
+      return nil
+end
+end
+end
+#This works, but I don't think it's right.
 
+# def add_pet_to_stock(shop_name, new_pets)
+#   for pet in new_pets
+#     shop_name[:pets] << pet
+# end
+# end
+#This should to be able to add multiple new stock pets if required
+
+def add_pet_to_stock(shop_name, new_pet)
+    shop_name[:pets] << new_pet
 end
