@@ -57,6 +57,8 @@ def remove_pet_by_name(shop, pet_name)
    for pet in shop[:pets]
      if pet[:name] == pet_name
        pet.shift
+       #I found this suggestion in the slack, I don't know why it works.
+       #If I undertsand correctly, .delete didn't work because that returns the thing it deletes.
    end
  end
 end
@@ -64,8 +66,6 @@ end
 
 
 
-
-# This works, but I don't think it's right.
 # def add_pet_to_stock(shop_name, new_pets)
 #   for pet in new_pets
 #     shop_name[:pets] << pet
@@ -94,11 +94,6 @@ end
 #arguement is the array @customers with the first position marked
 #why does the @customers call always have array place 0 defined?
 
-# def remove_customer_cash(customer, cost)
-#
-#
-# end
-
 def remove_customer_cash(customer, cost)
   return customer[:cash] -= cost
 end
@@ -113,28 +108,24 @@ return customer_pet_count(customer)
 end
 
 def customer_can_afford_pet(customer, new_pet)
-  case customer
-  when customer[:cash] >= new_pet[:price]
-    return true
-  when customer[:cash] < new_pet[:price]
-    return false
+if customer[:cash] >= new_pet[:price]
+  return true
+elsif customer[:cash] < new_pet[:price]
+  return false
 end
 end
 
-# def test_customer_can_afford_pet__sufficient_funds
-#   customer = @customers[0]
-#   can_buy_pet = customer_can_afford_pet(customer, @new_pet)
-#   assert_equal(true, can_buy_pet)
+# def customer_can_afford_pet(customer, new_pet)
+#   case customer
+#   when customer[:cash] >= new_pet[:price]
+#     return true
+#   when customer[:cash] < new_pet[:price]
+#     return false
+# end
 # end
 #
-# def test_customer_can_afford_pet__insufficient_funds
-#   customer = @customers[1]
-#   can_buy_pet = customer_can_afford_pet(customer, @new_pet)
-#   assert_equal(false, can_buy_pet)
-# end
-#
-# def test_customer_can_afford_pet__exact_funds
-#   customer = @customers[2]
-#   can_buy_pet = customer_can_afford_pet(customer, @new_pet)
-#   assert_equal(true, can_buy_pet)
-# end
+#Why didn't this work? Are case loops specifically meant for iteration?
+
+def sell_pet_to_customer
+
+end
