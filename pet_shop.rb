@@ -1,30 +1,30 @@
-def pet_shop_name(shop_name)
-return (shop_name)[:name]
+def pet_shop_name(shop)
+return (shop)[:name]
 end
 
-def total_cash(shop_name)
-  return shop_name[:admin][:total_cash]
+def total_cash(shop)
+  return shop[:admin][:total_cash]
 end
 
-def add_or_remove_cash(shop_name, amount)
-  return shop_name[:admin][:total_cash] += amount
+def add_or_remove_cash(shop, amount)
+  return shop[:admin][:total_cash] += amount
 end
 
-def pets_sold(shop_name)
-    return shop_name[:admin][:pets_sold]
+def pets_sold(shop)
+    return shop[:admin][:pets_sold]
 end
 
-def increase_pets_sold(shop_name, number_of_pets_sold)
-  return shop_name[:admin][:pets_sold] += number_of_pets_sold
+def increase_pets_sold(shop, number_of_pets_sold)
+  return shop[:admin][:pets_sold] += number_of_pets_sold
 end
 
-def stock_count(shop_name)
-  return shop_name[:pets].count
+def stock_count(shop)
+  return shop[:pets].count
 end
 
-def pets_by_breed(shop_name, breed)
+def pets_by_breed(shop, breed)
 count_breed = []
-for pet in shop_name[:pets]
+for pet in shop[:pets]
   if pet[:breed] == breed
 count_breed.push(pet[:name])
   end
@@ -32,15 +32,29 @@ end
 return count_breed
 end
 
-def find_pet_by_name(shop_name, pet_name)
-pet_found = nil
-  for pet in shop_name[:pets]
-    if pet[:name] == pet_name
 
-    end
-  end
-  return pet_name
+# def test_find_pet_by_name__returns_pet
+#   pet = find_pet_by_name(@pet_shop, "Arthur")
+#   assert_equal("Arthur", pet[:name])
+# end
+#
+# def test_find_pet_by_name__returns_nil
+#   pet = find_pet_by_name(@pet_shop, "Fred")
+#   assert_nil(pet)
+# end
+
+def find_pet_by_name(shop, pet_name)
+  searched_pet = nil
+   for pet in shop[:pets]
+     if pet[:name] == pet_name
+       searched_pet = pet
+   end
+ end
+return searched_pet
 end
+
+
+
 
 # This works, but I don't think it's right.
 
@@ -83,4 +97,9 @@ end
 
 def customer_pet_count(customer)
   return customer[:pets].count
+end
+
+def add_pet_to_customer(customer, new_pet)
+customer[:pets] << new_pet
+return customer_pet_count(customer)
 end
