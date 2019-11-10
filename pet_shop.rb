@@ -53,11 +53,19 @@ def find_pet_by_name(shop, pet_name)
 return searched_pet
 end
 
+def remove_pet_by_name(shop, pet_name)
+   for pet in shop[:pets]
+     if pet[:name] == pet_name
+       pet.shift
+   end
+ end
+end
+
+
 
 
 
 # This works, but I don't think it's right.
-
 # def add_pet_to_stock(shop_name, new_pets)
 #   for pet in new_pets
 #     shop_name[:pets] << pet
@@ -103,3 +111,30 @@ def add_pet_to_customer(customer, new_pet)
 customer[:pets] << new_pet
 return customer_pet_count(customer)
 end
+
+def customer_can_afford_pet(customer, new_pet)
+  case customer
+  when customer[:cash] >= new_pet[:price]
+    return true
+  when customer[:cash] < new_pet[:price]
+    return false
+end
+end
+
+# def test_customer_can_afford_pet__sufficient_funds
+#   customer = @customers[0]
+#   can_buy_pet = customer_can_afford_pet(customer, @new_pet)
+#   assert_equal(true, can_buy_pet)
+# end
+#
+# def test_customer_can_afford_pet__insufficient_funds
+#   customer = @customers[1]
+#   can_buy_pet = customer_can_afford_pet(customer, @new_pet)
+#   assert_equal(false, can_buy_pet)
+# end
+#
+# def test_customer_can_afford_pet__exact_funds
+#   customer = @customers[2]
+#   can_buy_pet = customer_can_afford_pet(customer, @new_pet)
+#   assert_equal(true, can_buy_pet)
+# end
