@@ -24,12 +24,12 @@ end
 
 def pets_by_breed(shop, breed)
 count_breed = []
-for pet in shop[:pets]
-  if pet[:breed] == breed
-count_breed.push(pet[:name])
+  for pet in shop[:pets]
+    if pet[:breed] == breed
+  count_breed.push(pet[:name])
+    end
   end
-end
-return count_breed
+  return count_breed
 end
 
 
@@ -63,9 +63,6 @@ def remove_pet_by_name(shop, pet_name)
  end
 end
 
-
-
-
 # def add_pet_to_stock(shop_name, new_pets)
 #   for pet in new_pets
 #     shop_name[:pets] << pet
@@ -88,7 +85,7 @@ end
 # end
 
 def customer_cash(customer)
-return customer[:cash]
+  return customer[:cash]
 end
 #I JUST WASTED AN HOUR TRYING TO FIGURE OUT WHY 'CUSTOMER' WAS CALLED WITH AN IMPLICIT ARRAY ARGUMENT!!!
 #arguement is the array @customers with the first position marked
@@ -102,17 +99,26 @@ def customer_pet_count(customer)
   return customer[:pets].count
 end
 
-def add_pet_to_customer(customer, new_pet)
-customer[:pets] << new_pet
-return customer_pet_count(customer)
+def add_pet_to_customer(customer, pet)
+  customer[:pets] << pet
+  return customer_pet_count(customer)
 end
+#A failure in the integration suggests I did this wrong.
+
+# def customer_can_afford_pet(customer, new_pet)
+# if customer[:cash] >= new_pet[:price]
+#   return true
+# elsif customer[:cash] < new_pet[:price]
+#   return false
+# end
+# end
 
 def customer_can_afford_pet(customer, new_pet)
-if customer[:cash] >= new_pet[:price]
-  return true
-elsif customer[:cash] < new_pet[:price]
-  return false
-end
+  if (customer[:cash] >= new_pet[:price])
+    return true
+  else
+    return false
+  end
 end
 
 # def customer_can_afford_pet(customer, new_pet)
@@ -126,6 +132,16 @@ end
 #
 #Why didn't this work? Are case loops specifically meant for iteration?
 
-def sell_pet_to_customer
-
+def sell_pet_to_customer(shop, pet, customer)
+  if find_pet_by_name(shop, pet) != nil
+    then
+ if customer_can_afford_pet(customer, pet)
+  then
+  add_pet_to_customer(customer, pet)
+  # remove_pet_by_name(shop, pet)
+  increase_pets_sold(shop, 1)
+  remove_customer_cash(customer, pet[:price])
+  add_or_remove_cash(shop, pet[:price])
+end
+end
 end
